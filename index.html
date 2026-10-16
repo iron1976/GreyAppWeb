@@ -1,55 +1,104 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f0f4f8;
-            color: #333;
-            text-align: center;
-            padding: 60px 20px;
-            margin: 0;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
-            padding: 40px 20px;
-            border-radius: 16px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            color: #2563eb;
-        }
-
-        button {
-            background: #2563eb;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        button:hover {
-            background: #1d4ed8;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grey Ragdoll: Physics-Driven Behavioural Ragdolls for Game Engines and Simulations</title>
+<style>
+  :root {
+    --bg: #f4f4f2; --paper: #ffffff; --text: #1c1c1c; --muted: #5c5c5c;
+    --accent: #1e3a8a; --rule: #cfcfcf;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #151515; --paper: #1e1e1e; --text: #e8e8e8; --muted: #a0a0a0; --accent: #8fb0ff; --rule: #3a3a3a; }
+  }
+  body { margin: 0; padding: 40px 16px; background: var(--bg); color: var(--text);
+         font-family: Georgia, "Times New Roman", serif; line-height: 1.65; }
+  article { max-width: 760px; margin: 0 auto; background: var(--paper);
+            padding: 48px 56px; border: 1px solid var(--rule); }
+  header { text-align: center; border-bottom: 1px solid var(--rule); padding-bottom: 24px; margin-bottom: 28px; }
+  h1 { font-size: 1.9rem; line-height: 1.25; margin: 0 0 14px; color: var(--accent); }
+  .authors { margin: 0; font-size: 1.05rem; }
+  .meta { margin: 6px 0 0; color: var(--muted); font-size: 0.92rem; }
+  h2 { font-size: 1.2rem; margin: 32px 0 8px; color: var(--accent); }
+  h3 { font-size: 1.02rem; margin: 20px 0 4px; font-style: italic; }
+  p { margin: 0 0 12px; text-align: justify; }
+  .abstract { border-left: 3px solid var(--accent); padding: 4px 0 4px 18px; margin: 0 0 24px; }
+  .abstract h2 { margin-top: 0; }
+  .keywords { font-size: 0.95rem; color: var(--muted); }
+  ol, ul { margin: 0 0 12px; padding-left: 24px; }
+  li { margin-bottom: 6px; }
+  nav { border: 1px solid var(--rule); padding: 12px 20px; margin-bottom: 8px; font-size: 0.95rem; }
+  nav strong { display: block; margin-bottom: 4px; }
+  nav a { color: var(--accent); text-decoration: none; }
+  nav a:hover { text-decoration: underline; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.95rem; display: block; overflow-x: auto; }
+  th, td { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: color-mix(in srgb, var(--accent) 10%, transparent); }
+  caption { caption-side: bottom; font-size: 0.88rem; color: var(--muted); padding-top: 6px; text-align: left; }
+  footer { margin-top: 36px; padding-top: 14px; border-top: 1px solid var(--rule); color: var(--muted); font-size: 0.88rem; }
+  @media (max-width: 600px) { article { padding: 28px 20px; } p { text-align: left; } }
+</style>
 </head>
-
 <body>
-    <div class="container">
-        <h1>What is Grey Ragdoll?</h1>
+<article>
 
-        <p>Grey Ragdoll is an upcoming Physics Driven Behavioural Ragdoll Physics system for Game Engines and Simulations</p>
-			
-    </div>
+<header>
+  <h1>Grey Ragdoll: A Physics-Driven Behavioural Ragdoll System for Game Engines and Simulations</h1>
+  <p class="authors">Demir Bayık, Yağmur Yayla, Ahmet Akbulut, Mehmet Tuğrul Gördü</p>
+  <p class="meta">Supervisor: Tolga Kurtuluş Çapın</p>
+  <p class="meta">Project status: in development</p>
+</header>
+
+<section class="abstract" id="abstract">
+  <h2>Abstract</h2>
+  <p>Grey Ragdoll is an upcoming physics-driven behavioural ragdoll system intended for game engines and simulations. Its goal is to deliver ragdoll motion that feels convincing and satisfying, rather than loose, lifeless or unresponsive. Existing approaches fall into two groups: powered (active) ragdolls that track a reference animation, and passive ragdolls that react only to gravity and collisions. Both have clear limitations in realism. This document outlines the problem, reviews these approaches, and states the objectives of the proposed system.</p>
+  <p class="keywords"><strong>Keywords:</strong> ragdoll physics, active ragdolls, behavioural animation, physics-driven character control, game engines, simulation</p>
+</section>
+
+<nav aria-label="Contents">
+  <strong>Contents</strong>
+  <a href="#introduction">1. Introduction</a> ·
+  <a href="#related-work">2. Existing Approaches</a> ·
+  <a href="#limitations">3. Limitations</a> ·
+  <a href="#objectives">4. Objectives</a>
+</nav>
+
+<section id="introduction">
+  <h2>1. Introduction</h2>
+  <p>Ragdoll physics is widely used to animate characters that react to impacts, falls and other forces. The perceived quality of these reactions strongly affects immersion in games and the credibility of simulations. Grey Ragdoll addresses this by driving character behaviour through physics, so that the body responds to its environment instead of replaying fixed motion.</p>
+</section>
+
+<section id="related-work">
+  <h2>2. Existing Approaches</h2>
+
+  <h3>2.1 Powered / Active Ragdolls</h3>
+  <p>Powered ragdolls use a reference animation as a target and apply physics-driven control to push each body part toward the position and rotation that the animation prescribes. The result is physically simulated, but it is constantly pulled toward a pre-authored pose.</p>
+
+  <h3>2.2 Normal (Passive) Ragdolls</h3>
+  <p>Passive ragdolls are affected only by gravity, collisions and the surrounding environment. No external physics-based control is applied to the body, so the character cannot attempt to balance, brace or recover.</p>
+
+  <table>
+    <caption>Table 1. Summary of existing ragdoll approaches.</caption>
+    <thead><tr><th>Approach</th><th>Control source</th><th>Main drawback</th></tr></thead>
+    <tbody>
+      <tr><td>Powered / active</td><td>Reference animation tracked by physics</td><td>Forced toward a static pose; unrealistic in situations such as balancing</td></tr>
+      <tr><td>Normal / passive</td><td>Gravity, collisions and environment only</td><td>No active control; the least realistic option</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="limitations">
+  <h2>3. Limitations of Current Solutions</h2>
+  <p><strong>Powered ragdolls.</strong> Because body parts are always driven toward a played animation, the result can look unrealistic. In balancing situations, for example, the torso appears to correct itself on its own instead of balance being achieved through foot replacement, as a real body would do.</p>
+  <p><strong>Normal ragdolls.</strong> With no control beyond external forces, motion appears limp and unnatural. This is the least realistic of the existing options.</p>
+</section>
+ 
+
+<footer>
+  Project page: <a href="https://iron1976.github.io/GreyAppWeb/">iron1976.github.io/GreyAppWeb</a>
+</footer>
+
+</article>
 </body>
 </html>
